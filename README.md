@@ -6,3 +6,6 @@ Creating a YTDownloader GUI using terminal
 --> dialog, sudo apt install dialog // sudo pacman -S dialog
 
 --> yt-dpl install, sudo apt install yt-dlp // sudo pacman -S yt-dlp
+
+## Execution
+just run the main_downloader.sh file [ no parameters required ].
