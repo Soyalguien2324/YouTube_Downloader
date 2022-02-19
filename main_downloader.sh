@@ -29,10 +29,11 @@ take_string_input() {
 show_video_quality() {
     touch video_quality.txt
      
-    header_message="+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ AVAILABLE VIDEO FORMATS TO DOWNLOAD++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    header_message="+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ AVAILABLE VIDEO FORMATS TO DOWNLOAD ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     printf "$header_message \n\n" >> video_quality.txt
-    yt-dlp -F $videolink > video_quality.txt
-    printf "\n\n$header_message\n\n" >> video_quality.txt
+    yt-dlp -F $videolink >> video_quality.txt
+    tail_message="+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ READ BELOW INFO. ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    printf "\n\n$tail_message\n\n" >> video_quality.txt
 
     printf "\n[Please remember the video ID of the quality you want to download, (video id is in the leftmost column.)] \n Alse take a close look at ACODEC(Audio Codec) column, some have video only, no audio." >> video_quality.txt
 
