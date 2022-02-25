@@ -1,5 +1,6 @@
 #!/bin/bash
 #can change this for custom download folder
+
 download_folder="YT-Downloads"
 display_message() {
     message=$1
@@ -43,12 +44,37 @@ show_video_quality() {
     clear
 }
 
+# FUNCTION TO DOWNLOAD VIDEO
 download_video() {
     video_code=$1
+    folder_to_download=$2
+    if [[ $# -eq 3 ]]
+    then
+		custom_folder=$3
+	fi
+	
+	# storing current path.
     current_path=$(pwd)
-    cd ~/Downloads/$download_folder
+    
+    if [[ $# -eq 3 ]]
+    then
+		cd ~/Downloads/$folder_to_download/$custom_folder
+    else
+		cd ~/Downloads/$folder_to_download
+	fi
+    
     yt-dlp -f $video_code $videolink
-    display_message "Video Downloaded to ~/Downloads/$download_folder" 20 60
+	
+	echo "press enter to continue"
+	read enter_button
+    
+    if [[ $# -eq 3 ]]
+    then
+		display_message "Video Downloaded to $folder_to_download/$custom_folder" 20 60
+    else
+		display_message "Video Downloaded to $folder_to_download" 20 60
+	fi
+    
     cd $current_path
 }
 
@@ -65,7 +91,7 @@ checkConnectivity() {
     then
         display_message_with_wait "[connected to the internet.]" 1 5 40
     else
-        display_message "[not connected, try again.]" 5 30
+        display_message "[not connected, try again.]" 5 40
         exit
     fi
     rm -rf internet_connectivity.txt
@@ -80,15 +106,35 @@ displayFile(){
 }
 
 MAIN() {
+	if [[ $# -eq 1 ]]
+	then
+		custom_folder=$1
+		download_folder_new="~/Downloads/$download_folder/$custom_folder"
+	else
+		download_folder_new="~/Downloads/$download_folder"
+	fi
+	
     #checking if folder already present.
     if [[ -d "~/Downloads/$download_folder" ]]
     then
-        :
+        if [[ $# -eq 1 ]]
+        then
+			if [[ -d "~/Downloads/$download_folder/$custom_folder" ]]
+			then
+				:
+			else
+				mkdir ~/Downloads/$download_folder/$custom_folder
+			fi
+		fi
     else
-        mkdir ~/Downloads/$download_folder
+        mkdir "~/Downloads/$download_folder"
+        if [[ $# -eq 1 ]]
+        then
+			mkdir ~/Downloads/$download_folder/$custom_folder
+		fi
     fi
 
-    display_message "Youtube-Video-Downloader" 5 30
+    display_message "Youtube-Video-Downloader {download folder : $download_folder_new}" 20 50
     
     #checking internet connectivity
     display_message_with_wait "(checking for internet connectivity)" 1 5 40
@@ -104,56 +150,47 @@ MAIN() {
     show_video_quality $videolink
 
     touch select_video_quality.txt
-    echo "press enter" ; read temp
-    dialog --inputbox "Enter Video ID : " 10 25 '' 2> select_video_quality.txt
+    echo "press enter to continue" ; read temp
+    dialog --inputbox "Enter Video ID : " 10 29 '' 2> select_video_quality.txt
     clear
     video_quality=$(cat select_video_quality.txt)
-    download_video $video_quality
+
+    # Download Video
+    download_video $video_quality $download_folder $custom_folder
+
     rm -rf select_video_quality.txt
 }
 
+# help method.
+if [[ $# -eq 1 ]]
+then
+	if [[ "$1" == "-h" || "$1" == "--help" ]]
+	then
+		echo "[Help]"
+		echo "-------------------------------------"
+		echo "Usage : yt-download <argument> : the argument is optional"
+		echo
+		echo "Default Download folder, ~/Downloads/YT-Downloads will be created."
+		echo
+		echo "Extra parameter usage (eg) : "
+		echo "	yt-download <my_custom_folder_name> : will download the files in a custom folder inside {~/Downloads/YT-Downloads}"
+		echo "Thank You."
+        exit
+    else
+		custom_folder=$1
+		#echo "custom download folder: $custom_folder"
+		#exit
+	fi
+elif [[ $# -gt 1 ]]
+then
+	echo "wrong number of argumets, try again."
+	exit
+fi
+	
+# FUNCTION CALLS
+MAIN $custom_folder
 
 
-#mkdir ~/Downloads/$download_folder
-
-#display_message YouTube-Video-Downloader 5 30
-#display_message_with_wait "(checking for internet connectivity)" 1 5 40
-
-#touch internet_connectivity.txt
-#curl -Is google.in | head -n 1 > internet_connectivity.txt
-#if [[ -s ./internet_connectivity.txt ]]
-#then
-#    display_message_with_wait "[connected to net.]" 1 5 40
-#else
-#    display_message "[not connected, try again.]" 5 30
-#    exit
-#fi
-#rm -rf internet_connectivity.txt
-
-
-# download file
-#take inp
-#take_string_input
-#touch videotitle.txt
-#yt-dlp --get-title $videolink > videotitle.txt
-#videotitle=$(cat videotitle.txt)
-#display_message "$videotitle" 30 100
-#rm -rf videotitle.txt
-
-#show video quality
-#show_video_quality $videolink
-
-#touch select_video_quality.txt
-#echo "press enter"
-#read temp
-#dialog --inputbox "Enter the quality code of the video:[video code is in the left]" 4 10 '' 2> select_video_quality.txt
-
-#dialog --inputbox "Enter video code : " 10 25 '' 2> select_video_quality.txt
-
-#clear
-#video_quality=$(cat select_video_quality.txt)
-#download_video $video_quality
-#rm -rf select_video_quality.txt
-
-MAIN
+#clear the screen after.
+clear
 
