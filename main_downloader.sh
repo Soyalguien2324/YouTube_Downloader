@@ -159,6 +159,18 @@ MAIN() {
     download_video $video_quality $download_folder $custom_folder
 
     rm -rf select_video_quality.txt
+
+}
+
+SHOW_FILES() {
+    customFolderName=$1
+    cd ~/Downloads/$download_folder/$customFolderName
+    touch files.txt
+    dialog --title "$(pwd) [select any file to play]" --fselect . 15 40 2> files.txt
+    file_name=$(cat files.txt)
+    # rm -rf files.txt
+    mpv file_name
+    clear
 }
 
 # help method.
@@ -186,10 +198,16 @@ then
 	echo "wrong number of argumets, try again."
 	exit
 fi
-	
+
+
+
+########################################################################
 # FUNCTION CALLS
 MAIN $custom_folder
 
+
+#extra items
+#SHOW_FILES $custom_folder
 
 #clear the screen after.
 clear
