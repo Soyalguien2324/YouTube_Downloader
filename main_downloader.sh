@@ -86,7 +86,7 @@ play_video() {
 
 checkConnectivity() {
     touch internet_connectivity.txt
-    curl -Is start.duckduckgo.com | head -n 1 > internet_connectivity.txt
+    curl -Is youtube.com | head -n 1 > internet_connectivity.txt
     if [[ -s ./internet_connectivity.txt ]]
     then
         display_message_with_wait "[connected to the internet.]" 1 5 40
