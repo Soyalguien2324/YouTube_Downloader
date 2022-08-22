@@ -1,6 +1,8 @@
 #!/bin/bash
 #can change this for custom download folder
 
+bash ./requirements.sh
+
 download_folder="YT-Downloads"
 display_message() {
     message=$1
@@ -22,6 +24,12 @@ videolink=''
 take_string_input() {
     touch take_string_input.txt
     dialog --inputbox "Enter YouTube link : " 25 50 '' 2> take_string_input.txt
+	if [ -s "take_string_input.txt" ]
+	then
+		:
+	else
+		exit
+	fi
     videolink=$(cat take_string_input.txt)
     rm -rf take_string_input.txt
     clear
@@ -106,16 +114,18 @@ displayFile(){
 }
 
 MAIN() {
+
+	
 	if [[ $# -eq 1 ]]
 	then
 		custom_folder=$1
-		download_folder_new="~/Downloads/$download_folder/$custom_folder"
+		download_folder_new=~/Downloads/$download_folder/$custom_folder
 	else
-		download_folder_new="~/Downloads/$download_folder"
+		download_folder_new=~/Downloads/$download_folder
 	fi
 	
     #checking if folder already present.
-    if [[ -d "~/Downloads/$download_folder" ]]
+    if [ -d "~/Downloads/$download_folder" ]
     then
         if [[ $# -eq 1 ]]
         then
@@ -127,7 +137,7 @@ MAIN() {
 			fi
 		fi
     else
-        mkdir "~/Downloads/$download_folder"
+        mkdir ~/Downloads/$download_folder
         if [[ $# -eq 1 ]]
         then
 			mkdir ~/Downloads/$download_folder/$custom_folder
@@ -142,8 +152,10 @@ MAIN() {
 
     #taking video link input
     take_string_input
+	touch videotitle_unwraped.txt
     touch videotitle.txt # extracting video title
-    yt-dlp --get-title $videolink > videotitle.txt
+    yt-dlp --get-title $videolink > videotitle_unwraped.txt
+	fold -w 99 videotitle_unwraped.txt > videotitle.txt
     displayFile videotitle.txt 100 100
     rm -rf videotitle.txt
 
