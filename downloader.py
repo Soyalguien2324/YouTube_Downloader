@@ -3,6 +3,7 @@ from rich.console import Console
 from rich.table import Table
 from rich.prompt import Prompt, Confirm
 from rich.panel import Panel
+from rich.padding import Padding
 import os
 
 
@@ -55,7 +56,7 @@ os.system(f'bash requirements.sh {distro} {verbose_mode}')
 
 
 # take link input
-yt_link = console.input('enter [blue]link[/]:')
+yt_link = console.input('\nenter [blue]link[/]:-> ')
 
 
 # download the video
