@@ -8,4 +8,6 @@
 	2. debian : sudo apt install python3-pip && pip install rich
 	3. fedora : sudo dnf install python-pip && pip install rich
 
+# How to run
+python3 downloader.py
 
