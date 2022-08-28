@@ -33,7 +33,7 @@ else
 	if [ $distro -eq 1 ]
 	then
 		# arch
-		sudo pacman -S yt-dlp python3-pip
+		sudo pacman -S yt-dlp python-pip
 		
 
 	elif [ $distro -eq 2 ]
@@ -42,7 +42,7 @@ else
 		sudo apt install yt-dlp python3-pip
 	else
 		# fedora
-		sudo dnf install yt-dlp python3-pip
+		sudo dnf install yt-dlp python-pip
 	fi
 fi
 

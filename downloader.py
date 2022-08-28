@@ -8,7 +8,7 @@ import os
 
 console = Console()
 
-a = Confirm.ask("[verbose_mode]Do you want to print all the outputs?", choices=['y','n'])
+a = Confirm.ask("Do you want the detailed information?", choices=['y','n'])
 if a:
     verbose_mode=1
 else:
