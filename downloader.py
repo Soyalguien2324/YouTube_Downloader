@@ -63,6 +63,15 @@ yt_link = console.input('\nenter [blue]link[/]:-> ')
 os.system(f'bash start_download.sh {yt_link} {verbose_mode}')
 
 
+# read file for name
+videotitle=''
+with open('./videotitle.txt', 'r') as file:
+    videotitle = file.read()
+
+
 # end message
-console.print(Panel('Video Downloaded To : ~/Downloads/YT-Downloads/'))
+console.print(Panel(f'Video Downloaded To : ~/Downloads/YT-Downloads/{videotitle}'))
+
+
+os.system('rm -rf ./videotitle.txt')
 

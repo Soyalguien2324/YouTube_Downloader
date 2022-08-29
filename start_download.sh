@@ -9,7 +9,7 @@ yt-dlp --get-title $link > videotitle.txt
 a=$(cat ./videotitle.txt)
 
 
-rm -rf ./videotitle.txt
+#rm -rf ./videotitle.txt
 
 
 if [ $verbose -eq 1 ]
@@ -31,7 +31,7 @@ current_path=$(pwd)
 cd ~/Downloads/YT-Downloads/
 
 
-yt-dlp -f "bv*+ba/b" $link
+yt-dlp -N 10 -f "bv*+ba/b" $link
 
 cd $current_path
 

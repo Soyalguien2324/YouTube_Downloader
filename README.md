@@ -9,5 +9,7 @@
 	3. fedora : sudo dnf install python-pip && pip install rich
 
 # How to run
-python3 downloader.py
+
+	
+	python3 downloader.py
 
