@@ -1,5 +1,12 @@
-## IF 'pip' not installed, install pip.
-## make sure 'rich' package is installed
+# YouTube Downloader
+
+---
+
+Pre-requisites :
+
+	- IF 'pip' not installed, install pip.
+ 
+	- make sure 'rich' package is installed
 
 
 ### install pip and rich

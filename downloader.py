@@ -58,6 +58,11 @@ os.system(f'bash requirements.sh {distro} {verbose_mode}')
 # take link input
 yt_link = console.input('\nenter [blue]link[/]:-> ')
 
+# display message
+if verbose_mode:
+    console.print(Panel(f'It will download the best possible audio and video and merge them.'))
+
+
 
 # download the video
 os.system(f'bash start_download.sh {yt_link} {verbose_mode}')
