@@ -14,11 +14,10 @@ Pre-requisites :
 ```console
 foo@bar:~$ whoami
 foo
+``` 
+```console
+foo@bar:~$ sudo pacman -S python-pip && pip install rich
 ```
-	1. arch : 
-				```console
-				foo@bar:~$ sudo pacman -S python-pip && pip install rich
-				```
 	2. debian : 
 				```console
 				foo@bar:~$ sudo apt install python3-pip && pip install rich
