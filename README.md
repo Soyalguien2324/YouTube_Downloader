@@ -15,13 +15,16 @@ Pre-requisites :
 foo@bar:~$ whoami
 foo
 ```
-	1. arch : ```console
+	1. arch : 
+				```console
 				sudo pacman -S python-pip && pip install rich
-			  ```
-	2. debian : ```console
+				```
+	2. debian : 
+				```console
 				sudo apt install python3-pip && pip install rich
 				```
-	3. fedora : ```console
+	3. fedora : 
+				```console
 				sudo dnf install python-pip && pip install rich
 				```
 
