@@ -12,24 +12,18 @@ Pre-requisites :
 ### install pip and rich
 
 ```console
-foo@bar:~$ whoami
-foo
+user_of@ARCHLINUX:~$ sudo pacman -S python-pip && pip install rich
+```
+```console
+user_of@DEBIAN:~$ sudo apt install python3-pip && pip install rich
 ``` 
 ```console
-foo@bar:~$ sudo pacman -S python-pip && pip install rich
+user_of@FEDORA:~$ sudo dnf install python-pip && pip install rich
 ```
-	2. debian : 
-				```console
-				foo@bar:~$ sudo apt install python3-pip && pip install rich
-				```
-	3. fedora : 
-				```console
-				foo@bar:~$ sudo dnf install python-pip && pip install rich
-				```
 
 # How to run
 
-	```python
-	python3 downloader.py
-	```
+```python
+python3 downloader.py
+```
 
