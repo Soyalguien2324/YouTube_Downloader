@@ -30,9 +30,12 @@ fi
 current_path=$(pwd)
 cd ~/Downloads/YT-Downloads/
 
-
-yt-dlp --write-thumbnail -N 10 -f "bv*+ba/b" $link
-
+if [ $verbose -eq 1 ]
+then
+	yt-dlp --progress --write-thumbnail -N 10 -f "bv*+ba/b" $link
+else
+	yt-dlp -q --write-thumbnail -N 10 -f "bv*+ba/b" $link
+fi
 cd $current_path
 
 

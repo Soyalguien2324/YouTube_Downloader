@@ -67,7 +67,8 @@ yt_link = console.input(':musical_note: enter [blue]link[/]:')
 
 # downloading message
 if verbose_mode:
-    console.print(Panel(f':carousel_horse: Downloading Video'))
+    console.log('starting download.')
+console.print(Panel(f':carousel_horse: Downloading Video'))
 
 # download the video
 os.system(f'bash start_download.sh {yt_link} {verbose_mode}')
