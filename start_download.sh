@@ -31,7 +31,7 @@ current_path=$(pwd)
 cd ~/Downloads/YT-Downloads/
 
 
-yt-dlp -N 10 -f "bv*+ba/b" $link
+yt-dlp --write-thumbnail -N 10 -f "bv*+ba/b" $link
 
 cd $current_path
 
