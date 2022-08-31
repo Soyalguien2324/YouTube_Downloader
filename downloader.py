@@ -3,13 +3,20 @@ from rich.console import Console
 from rich.table import Table
 from rich.prompt import Prompt, Confirm
 from rich.panel import Panel
-from rich.padding import Padding
 import os
+from enum import Enum
+
+class DistroCode(Enum):
+    Arch = 1
+    Debian = 2
+    Fedora = 3
+
+
 
 
 console = Console()
 
-a = Confirm.ask("Do you want the detailed information?", choices=['y','n'])
+a = Confirm.ask("[verbose_mode]Do you want to print all the outputs?", choices=['y','n'])
 if a:
     verbose_mode=1
 else:
@@ -18,12 +25,12 @@ else:
 
 
 if verbose_mode:
-    console.print(Panel('[cyan]Youtube Video Downloader[/] (verbose)'), justify="center")
+    console.print(Panel(':nut_and_bolt: [cyan]Youtube Video Downloader[/] (verbose)'), justify="center")
 else:
-    console.print(Panel('[cyan]Youtube Video Downloader[/]'), justify='center')
+    console.print(Panel(':clapper: [cyan]Youtube Video Downloader[/]'), justify='center')
 
 def take_distro_input ():
-    distro = Prompt.ask("Enter the Distro Code: ", choices=['1', '2', '3'])
+    distro = Prompt.ask("Enter the Distro Code ", choices=['1', '2', '3'])
     distro = int(distro)
     return distro
 
@@ -44,11 +51,11 @@ console.print(table, justify='center')
 
 # taking distro input
 distro = take_distro_input()
-
+distro_name = DistroCode(distro).name
 
 # distro code
 if verbose_mode:
-    console.log(f'entered distro code : {distro}')
+    console.log(f'users distro : {distro_name}')
 
 
 # fullfill requirements
@@ -56,27 +63,14 @@ os.system(f'bash requirements.sh {distro} {verbose_mode}')
 
 
 # take link input
-yt_link = console.input('\nenter [blue]link[/]:-> ')
+yt_link = console.input(':musical_note: enter [blue]link[/]:')
 
-# display message
+# downloading message
 if verbose_mode:
-    console.print(Panel(f'It will download the best possible audio and video and merge them.'))
-
-
+    console.print(Panel(f':carousel_horse: Downloading Video'))
 
 # download the video
 os.system(f'bash start_download.sh {yt_link} {verbose_mode}')
 
 
-# read file for name
-videotitle=''
-with open('./videotitle.txt', 'r') as file:
-    videotitle = file.read()
-
-
-# end message
-console.print(Panel(f'Video Downloaded To : ~/Downloads/YT-Downloads/{videotitle}'))
-
-
-os.system('rm -rf ./videotitle.txt')
-
+console.print(Panel('Video Downloaded in :open_file_folder: [cyan]~/Downloads/YT-Downloads[/]'), justify="center")
