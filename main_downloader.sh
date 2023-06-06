@@ -88,7 +88,7 @@ download_video() {
 
 play_video() {
     videopath="~/Downloads/Videos/$1"
-    mpv videopath
+    mplayer videopath
     clear
 }
 
